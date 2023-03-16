@@ -9,4 +9,5 @@ app.use(VueClipboard, {
     autoSetContainer: true,
     appendToBody: true,
   })
+  
 app.mount('#app')

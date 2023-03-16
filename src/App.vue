@@ -4,7 +4,7 @@
       <div class="d-flex justify-content-center p-5">
         <ve-progress
           :progress="
-            (results.length /
+            (getProgress() /
               (numIPs != 'custom' ? numIPs : parseInt(customIPs))) *
             100
           "
@@ -116,7 +116,9 @@
       </div>
 
       <div class="d-flex justify-content-center">
-        <button @click="startScan" class="circle-button">شروع</button>
+        <button @click="!started ? startScan() : stop = true;" class="circle-button">
+        {{!started ? 'شروع' : 'توقف'}}
+        </button>
       </div>
     </div>
 
@@ -386,8 +388,11 @@ export default {
   data() {
     return {
       numIPs: 10,
+      started:false,
+      stop:false,
+      ended:false,
       workingOn: "",
-      customIPs: 4000000000,
+      customIPs: 10000,
       downloadSize: "1048576",
       results: [],
       customInput: false,
@@ -400,17 +405,39 @@ export default {
   },
 
   methods: {
+    getProgress(){
+      if(!this.customInput){
+        if(this.results.length >= this.customIPs){
+        return this.customIPs
+      }else{
+        return this.results.length
+      }
+      }else{
+        if(this.results.length >= this.numIPs){
+        return this.numIPs
+      }else{
+        return this.results.length
+      }
+      }
+    },
     onCopy() {
       alert("Copied to clipboard");
     },
+ 
     async startScan() {
+      this.started = true
       this.results = [];
-      this.maxIP = this.numIPs;
+      this.maxIP = !this.customInput ? this.numIPs : this.customIPs;
       var cidr;
       for (var cdnLocation in cfIPv4) {
-        if (this.maxIP == 0 || this.numberOfWorkingIPs < this.maxIP - 1) {
+        if (this.maxIP == 0 || this.numberOfWorkingIPs < this.maxIP - 2) {
           let ips = [];
           for (cidr of cfIPv4[cdnLocation]) {
+            if(this.stop){
+              this.stop = false
+              this.started = false
+              break;
+            }
             ips = ips.concat(this.cidrToIpArray(cidr));
           }
           this.testIPs(this.randomizeElements(ips), cdnLocation);
@@ -421,6 +448,11 @@ export default {
     async testIPs(ipList, cdnLocation) {
       const timeout = 2500;
       for (const ip of ipList) {
+        if(this.stop || this.validIPs.length >= this.maxIP) {
+          this.stop = false
+          this.started = false
+          break;
+        }
         this.testNo++;
         var testResult = 0;
         const url = `https://${ip}/__down`;
@@ -428,7 +460,7 @@ export default {
         const controller = new AbortController();
 
         for (const ch of ["", "|", "/", "-", "\\"]) {
-          const timeoutId = setTimeout(() => {
+           let timeoutId = setTimeout(() => {
             controller.abort();
           }, timeout);
           if (ch) {
