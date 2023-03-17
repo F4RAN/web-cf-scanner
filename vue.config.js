@@ -1,5 +1,6 @@
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
     ? '/web-cf-scanner/'
-    : '/'
+    : '/',
+    outputDir:'./web-cf-scanner'
 }
