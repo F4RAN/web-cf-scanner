@@ -102,7 +102,7 @@
             "
             dir="ltr"
             style="border-radius: 10px; min-width: 100px"
-            v-for="num in ['custom', 10, 50, 100, 200, 500]"
+            v-for="num in ['custom', 10, 50]"
             :key="num"
           >
             {{ num != "custom" ? num : "مقدار دلخواه" + " " }}
@@ -136,9 +136,77 @@
           v-for="result in results"
           :key="result.ip"
         >
-          <small class="col-3" :style="{ color: result.color }">{{
-            result.time != -1 ? result.time + " ms" : "Error"
-          }}</small
+          <small v-if="result.download != -1">
+            <svg
+              fill="#94fffd"
+              width="16px"
+              height="16px"
+              viewBox="0 0 1024 1024"
+              xmlns="http://www.w3.org/2000/svg"
+              stroke="#94fffd"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M512 666.5L367.2 521.7l36.2-36.2 83 83V256h51.2v312.5l83-83 36.2 36.2L512 666.5zm-204.8 50.3V768h409.6v-51.2H307.2z"
+                ></path>
+              </g></svg
+            >{{ (result.download / 100).toFixed(2) }}
+          </small>
+          <small v-else
+            ><svg
+              fill="#f0f0f0"
+              height="16px"
+              width="16px"
+              version="1.1"
+              id="Capa_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="-29.7 -29.7 356.40 356.40"
+              xml:space="preserve"
+              stroke="#f0f0f0"
+              transform="rotate(0)"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M250.929,276.619h-17.463v-31.301c0-31.668-17.379-60.777-48.936-81.967c-3.924-2.635-6.363-8.324-6.363-14.852 s2.439-12.215,6.365-14.852c31.555-21.188,48.934-50.297,48.936-81.965V20.381h17.461c5.627,0,10.189-4.562,10.189-10.191 C261.118,4.561,256.556,0,250.929,0H46.071c-5.627,0-10.19,4.561-10.19,10.189c0,5.629,4.563,10.191,10.19,10.191h17.463v31.303 c0,31.668,17.377,60.777,48.936,81.965c3.924,2.637,6.363,8.324,6.363,14.852c0,6.529-2.439,12.217-6.365,14.854 c-31.557,21.188-48.934,50.297-48.934,81.965v31.301H46.071c-5.627,0-10.19,4.563-10.19,10.191c0,5.629,4.563,10.19,10.19,10.19 h204.857c5.627,0,10.189-4.56,10.189-10.19C261.118,281.182,256.556,276.619,250.929,276.619z M83.915,245.318 c0-33.275,25.006-55.035,39.914-65.043c9.633-6.467,15.385-18.346,15.385-31.775c0-13.428-5.752-25.307-15.385-31.773 c-14.908-10.008-39.914-31.768-39.914-65.043V20.381h129.17l-0.002,31.303c0,33.275-25.006,55.035-39.912,65.041 c-9.635,6.469-15.387,18.348-15.387,31.775c0,13.43,5.752,25.307,15.385,31.775c14.908,10.008,39.914,31.768,39.916,65.043v31.301 H83.915V245.318z"
+                ></path>
+              </g></svg
+          ></small>
+          <small class="col-3" :style="{ color: result.color }"
+            ><svg
+              fill="#e8e8e8"
+              width="16px"
+              height="16px"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              stroke="#e8e8e8"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <g id="Wave_Pulse_1" data-name="Wave Pulse 1">
+                  <path
+                    d="M8.974,18h0a1.446,1.446,0,0,1-1.259-.972L5.872,12.883c-.115-.26-.262-.378-.349-.378H2.562a.5.5,0,1,1,0-1H5.523a1.444,1.444,0,0,1,1.263.972l1.839,4.145c.116.261.258.378.349.378h0c.088,0,.229-.113.344-.368L13.7,6.956A1.423,1.423,0,0,1,14.958,6h0a1.449,1.449,0,0,1,1.26.975l1.839,4.151c.11.249.259.379.349.379h3.028a.5.5,0,0,1,0,1H18.41a1.444,1.444,0,0,1-1.263-.975L15.308,7.379c-.116-.261-.259-.378-.35-.379h0c-.088,0-.229.114-.344.368l-4.385,9.676A1.437,1.437,0,0,1,8.974,18Z"
+                  ></path>
+                </g>
+              </g></svg
+            >{{ result.time != -1 ? result.time + " ms" : "Error" }}</small
           ><span
             class="col-5 d-flex justify-content-center"
             v-clipboard:copy="result.ip"
@@ -254,7 +322,11 @@
               </svg>
             </span>
 
-            <span class="" @click="refactorConfig(result.ip)">
+            <span
+              v-if="hasProtocol"
+              class=""
+              @click="refactorConfig(result.ip)"
+            >
               <svg
                 width="20"
                 height="20"
@@ -284,141 +356,11 @@
 </template>
 
 <script>
-const cfIPv4 = {
-  London: [
-    "45.8.104.0/29",
-    "185.207.92.0/24",
-    "185.193.28.0/23",
-    "185.193.30.0/23",
-    "203.17.126.0/24",
-    "207.189.149.0/24",
-    "89.47.56.0/23",
-    "93.114.64.0/23",
-    "176.126.206.0/23",
-    "203.23.103.0/24",
-    "203.24.102.0/24",
-    "203.24.103.0/24",
-    "203.24.109.0/24",
-    "203.29.52.0/24",
-    "203.29.54.0/23",
-    "203.30.188.0/22",
-    "203.32.120.0/23",
-    "203.34.28.0/24",
-    "203.34.80.0/24",
-    "203.55.107.0/24",
-    "185.162.228.0/23",
-    "185.162.230.0/23",
-    "203.13.32.0/24",
-    "203.22.223.0/24",
-    "203.23.104.0/24",
-    "203.23.106.0/24",
-    "203.24.108.0/24",
-    "203.28.8.0/24",
-    "203.28.9.0/24",
-    "203.29.53.0/24",
-    "141.193.213.0/24",
-    "185.201.139.0/24",
-    "199.60.103.0/24",
-    "12.221.133.0/24",
-    "203.107.173.0/24",
-    "195.245.221.0/24",
-    "212.110.134.0/23",
-    "45.14.174.0/24",
-    "194.169.194.0/24",
-    "185.109.21.0/24",
-    "185.170.166.0/24",
-    "191.101.251.0/24",
-    "45.12.30.0/23",
-    "45.85.118.0/23",
-    "103.156.22.0/23",
-    "194.152.44.0/24",
-    "45.131.4.0/22",
-    "45.131.208.0/22",
-    "103.160.204.0/24",
-    "45.133.247.0/24",
-    "185.174.138.0/24",
-    "185.221.160.0/24",
-    "194.53.53.0/24",
-    "195.85.23.0/24",
-    "154.83.22.0/23",
-    "154.83.30.0/23",
-    "154.84.14.0/23",
-    "154.84.16.0/21",
-    "154.84.24.0/22",
-    "154.85.8.0/22",
-    "154.94.8.0/23",
-    "154.219.2.0/23",
-    "156.237.4.0/23",
-    "156.238.14.0/23",
-    "156.238.18.0/23",
-    "156.239.152.0/22",
-    "195.85.59.0/24",
-    "31.43.179.0/24",
-    "185.72.49.0/24",
-    "194.40.240.0/24",
-    "104.254.140.0/24",
-    "103.244.116.0/22",
-    "185.238.228.0/24",
-    "199.181.197.0/24",
-    "91.193.58.0/23",
-    "108.165.216.0/24",
-    "147.78.140.0/24",
-    "154.83.2.0/24",
-    "193.16.63.0/24",
-    "195.137.167.0/24",
-    "45.142.120.0/24",
-    "204.68.111.0/24",
-    "174.136.134.0/24",
-    "193.188.14.0/24",
-    "196.207.45.0/24",
-    "194.40.241.0/24",
-    "194.36.55.0/24",
-    "103.169.142.0/24",
-    "147.185.161.0/24",
-    "208.100.60.0/24",
-    "45.8.211.0/24",
-    "194.36.49.0/24",
-    "80.94.83.0/24",
-    "45.145.28.0/24",
-    "45.145.29.0/24",
-    "89.207.18.0/24",
-    "194.1.194.0/24",
-    "5.226.179.0/24",
-    "203.193.21.0/24",
-    "204.62.141.0/24",
-    "185.146.172.0/24",
-    "23.227.37.0/24",
-    "185.146.173.0/24",
-    "141.101.100.0/24",
-    "23.227.60.0/24",
-    "103.81.228.0/24",
-    "198.217.251.0/24",
-    "190.93.244.0/22",
-    "190.93.240.0/20",
-    "64.68.192.0/24",
-    "23.227.38.0/23",
-  ],
-  Worldwide: [
-    "173.245.48.0/20",
-    "103.21.244.0/22",
-    "103.22.200.0/22",
-    "103.31.4.0/22",
-    "141.101.64.0/18",
-    "108.162.192.0/18",
-    "190.93.240.0/20",
-    "188.114.96.0/20",
-    "197.234.240.0/22",
-    "198.41.128.0/17",
-    "162.158.0.0/15",
-    "104.16.0.0/13",
-    "104.24.0.0/14",
-    "172.64.0.0/13",
-    "131.0.72.0/22",
-  ],
-};
+import { cfIPv4 } from "../../public/ips.js";
 export default {
   data() {
     return {
+      cfIPv4,
       numIPs: 10,
       started: false,
       stop: false,
@@ -434,6 +376,7 @@ export default {
       validIPs: [],
       maxIP: 10,
       config: "",
+      hasProtocol: false,
     };
   },
 
@@ -494,7 +437,7 @@ export default {
           let ips = [];
           for (cidr of cfIPv4[cdnLocation]) {
             if (this.stop) {
-              this.stop = false;
+              this.stop = true;
               this.started = false;
               break;
             }
@@ -503,7 +446,7 @@ export default {
           this.testIPs(this.randomizeElements(ips), cdnLocation);
         }
       }
-      this.results.sort((a, b) => b.speed - a.speed);
+      this.results.sort((a, b) => a.speed - b.speed);
       this.started = false;
     },
     async testIPs(ipList, cdnLocation) {
@@ -518,7 +461,7 @@ export default {
 
         this.testNo++;
         var testResult = 0;
-        const url = `https://${ip}/__down`;
+        const url = `http://${ip}/cdn-cgi/trace`;
         const startTime = performance.now();
         const controller = new AbortController();
         for (const ch of ["", "|", "/", "-", "\\"]) {
@@ -540,11 +483,7 @@ export default {
 
             testResult++;
           } catch (error) {
-            if (error.name === "AbortError") {
-              //
-            } else {
-              testResult++;
-            }
+            break;
           }
           clearTimeout(timeoutId);
         }
@@ -553,19 +492,64 @@ export default {
 
         if (testResult === 5) {
           this.numberOfWorkingIPs++;
-          this.validIPs.push({
+
+          this.results.push({
             ip: ip,
             location: cdnLocation,
             time: Math.floor(duration / 5),
+            download: -1,
           });
-          const sortedArr = this.validIPs.sort((a, b) => a.time - b.time);
-          this.results = sortedArr;
+          this.measureDownloadRate(10, ip, this.results.length - 1);
         }
 
         if (this.maxIP > 0 && this.numberOfWorkingIPs >= this.maxIP) {
           break;
         }
       }
+    },
+    makeTraceRequest(ip) {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", `http://${ip}/cdn-cgi/trace`);
+        xhr.onload = () => {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            const responseText = xhr.responseText;
+            const time = Date.now();
+            resolve({ responseText, time });
+          } else {
+            reject(new Error(`Failed to load trace: ${xhr.statusText}`));
+          }
+        };
+        xhr.onerror = () => {
+          reject(new Error("Network error occurred while loading trace."));
+        };
+        xhr.send();
+      });
+    },
+    measureDownloadRate(numRequests, ip, index) {
+      let totalSize = 0;
+      let startTime = Date.now();
+      const requests = [];
+      for (let i = 0; i < numRequests; i++) {
+        requests.push(this.makeTraceRequest(ip));
+      }
+      Promise.all(requests)
+        .then((responses) => {
+          const endTime = Date.now();
+          for (const response of responses) {
+            totalSize += response.responseText.length;
+          }
+          const timeElapsed = endTime - startTime;
+          const downloadRate = (totalSize / timeElapsed) * 1000; // Download rate in bytes/second
+          this.results[index].download = downloadRate;
+          const sortedArr = this.results.sort(
+            (a, b) => b.download - a.download
+          );
+          this.results = sortedArr;
+        })
+        .catch((error) => {
+          console.error(`Error measuring download rate: ${error.message}`);
+        });
     },
     cidrToIpArray(cidr) {
       const parts = cidr.split("/");
@@ -592,10 +576,15 @@ export default {
     },
 
     randomizeElements(arr) {
-      return [...arr].sort(() => 0.5 - Math.random());
+      return [...arr].sort((el1, el2) => {
+        return el2.location === "London"
+          ? 0.75 - Math.random()
+          : 0.5 - Math.random();
+      });
     },
   },
   mounted() {
+    console.log(this.cfIPv4);
     if (this.$route.query.config) {
       let protocol = this.$route.query.config.split("//")[0] + "//";
       let encoded = this.$route.query.config.split("//")[1];
@@ -605,6 +594,7 @@ export default {
         decoded,
         encoded,
       };
+      this.hasProtocol = true;
     }
   },
 };

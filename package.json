@@ -2,16 +2,24 @@
   "name": "web-cf-scanner",
   "version": "1.1.0",
   "private": true,
+  "homepage": "https://f4ran.github.io/web-cf-scanner/",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^1.3.4",
     "bootstrap": "^5.2.3",
     "core-js": "^3.6.5",
+    "fast-speedtest-api": "^0.3.2",
+    "jsonp": "^0.2.1",
+    "ping": "^0.4.4",
+    "ping.js": "^0.3.0",
+    "pingman": "^2.0.0",
     "vue": "^3.0.0",
     "vue-ellipse-progress": "^2.1.1",
+    "vue-jsonp": "^2.0.0",
     "vue-router": "^4.1.6",
     "vue3-clipboard": "^1.0.0"
   },
