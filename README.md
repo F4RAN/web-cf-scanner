@@ -3,9 +3,7 @@
 **Scan Cloudflare IPs directly in the browser.**  
 A small Vue-based web app that helps you test Cloudflare IP candidates from your browser and keep a shortlist of the ones that respond best.
 
-Live demo: https://f4ran.github.io/web-cf-scanner/ citeturn0view0  
-Repository tagline: “Scan cloudflare on browser :)” citeturn3view0
-
+Live demo: https://f4ran.github.io/web-cf-scanner/
 ---
 
 ## What it does
