@@ -1,108 +1,77 @@
 # web-cf-scanner
 
-A lightweight **Cloudflare IP scanner** that probes Cloudflare IP ranges and identifies usable IPs for CDN, proxy, or network testing purposes.
+**Scan Cloudflare IPs directly in the browser.**  
+A small Vue-based web app that helps you test Cloudflare IP candidates from your browser and keep a shortlist of the ones that respond best.
 
-This tool automates scanning Cloudflare IP ranges, testing reachability and basic network behavior, and exporting working IP addresses for further use in routing, tunneling, or performance analysis workflows.
-
----
-
-## Features
-
-- Scan Cloudflare IPv4 / IPv6 ranges
-- Test IP reachability and responsiveness
-- Export usable Cloudflare IPs
-- Simple and script-friendly
-- Suitable for automation and research workflows
+Live demo: https://f4ran.github.io/web-cf-scanner/ citeturn0view0  
+Repository tagline: “Scan cloudflare on browser :)” citeturn3view0
 
 ---
 
-## Installation
+## What it does
 
-Clone the repository:
+Because browsers cannot perform raw ICMP ping, this project focuses on **HTTP(S)-level testing** (request timing / basic reachability) to quickly compare IP candidates from a simple UI. Use it to:
 
+- Try many Cloudflare IPs without installing native tools
+- Compare responsiveness in your current network environment
+- Copy/export the best candidates for further testing or configuration
+
+---
+
+## Tech Stack
+
+- Vue (Vue CLI project)
+- Static deployment via GitHub Pages
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Node.js (LTS recommended)
+- npm (or yarn/pnpm if you prefer)
+
+### Install
 ```bash
-git clone https://github.com/F4RAN/web-cf-scanner.git
-cd web-cf-scanner
-```
-
-Install dependencies (adjust based on implementation language):
-
-```bash
-# Example (Python)
-pip install -r requirements.txt
-
-# Example (Node.js)
 npm install
 ```
 
+### Run locally (development)
+```bash
+npm run serve
+```
+
+### Build (production)
+```bash
+npm run build
+```
+
+### Lint
+```bash
+npm run lint
+```
+
 ---
 
-## Usage
+## Deployment (GitHub Pages)
 
-Run the scanner with default settings:
+This repository includes a `deploy.sh` script (see repo root) citeturn3view0.  
+A typical workflow is:
 
 ```bash
-python scanner.py
+bash deploy.sh
 ```
 
-Or specify input and output files:
-
-```bash
-python scanner.py -i cloudflare_ips.txt -o results.txt
-```
-
-### Common Parameters
-
-| Flag | Description |
-|-----|-------------|
-| `-i` | Input file containing IP ranges |
-| `-o` | Output file for working IPs |
-| `-t` | Concurrency / thread count |
-
----
-
-## Input Format
-
-The input file should contain Cloudflare IP ranges or individual IP addresses, one per line:
-
-```
-104.16.0.0/12
-172.64.0.0/13
-```
-
-Official Cloudflare IP lists:
-- https://www.cloudflare.com/ips-v4
-- https://www.cloudflare.com/ips-v6
-
----
-
-## Output
-
-The output file contains a list of IPs that passed scanner checks:
-
-```
-104.16.12.34
-172.64.88.21
-```
-
----
-
-## Use Cases
-
-- CDN performance testing
-- Proxy and tunnel configuration
-- Network research and experimentation
-- Cloudflare routing validation
+(If you change the deployment strategy, ensure the app is built with the correct public/base path for GitHub Pages.)
 
 ---
 
 ## Contributing
 
-Contributions are welcome.  
-Please open issues or submit pull requests on GitHub.
+Issues and pull requests are welcome. If you add features, please keep the UI lightweight and keep scans non-blocking (avoid freezing the main thread).
 
 ---
 
 ## License
 
-MIT
+MIT citeturn3view0
