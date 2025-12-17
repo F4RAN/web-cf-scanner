@@ -53,7 +53,7 @@ npm run lint
 
 ## Deployment (GitHub Pages)
 
-This repository includes a `deploy.sh` script (see repo root) citeturn3view0.  
+This repository includes a `deploy.sh` script (see repo root)
 A typical workflow is:
 
 ```bash
@@ -72,4 +72,4 @@ Issues and pull requests are welcome. If you add features, please keep the UI li
 
 ## License
 
-MIT citeturn3view0
+MIT
